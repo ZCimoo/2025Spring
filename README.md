@@ -6,3 +6,5 @@ Hello! My name is Zachary Cimorelli I am a Junior studying computer science. So 
 I hope that with the skills I develop in this class I am able to work on projects of my own. Something I would like to challenge myself with using these skills is developing a finance tracker that is able to track my own bank accounts. I also hope this lays down a foundation for me to build upon to do this professionally.
 
 Also I don't always look like I do in the picture above. I just like the picture because I think its funny and I hope you do too!
+
+This file is only changed in the development branch
