@@ -16,8 +16,7 @@ const isActive= ref(false)
 
     </a>
 
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" 
-    :class="{ 'is-active': isActive }" @click="isActive = !isActive">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" :class="{ 'is-active': isActive }" @click="isActive = !isActive">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
