@@ -1,0 +1,6 @@
+
+###
+GET https://www.google.com/search?q=new+paltz
+###
+GET https://dummyjson.com/products/1
+###
