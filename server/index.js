@@ -13,6 +13,13 @@ app
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}/`);
 });
+/*
+Asynchronous Patterns in Node.js
+1. Callbacks
+2. Pipelines
+3. Promises
+4. Async/Await
+*/
 
 console.log("Hello World!");
 
