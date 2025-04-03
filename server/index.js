@@ -3,12 +3,17 @@ const productsController = require("./controllers/products");
 const PORT = 8000;
 
 const app = express();
+//Middleware
+app.use(express.json());
 
+//Controllers
 app
-  .get("/", (req, res) => {
+  .get("/hello", (req, res) => {
     res.send("Hello World!");
   })
-  .use("/api/v1/products", productsController);
+  .use("/api/v1/products", productsController)
+
+  .use("/", express.static("dist"));
 
 app.use((err, req, res, next) => {
   console.error(err);
