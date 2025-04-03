@@ -10,6 +10,16 @@ app
   })
   .use("/api/v1/products", productsController);
 
+app.use((err, req, res, next) => {
+  console.error(err);
+  const status = err.status || 500;
+  const error = {
+    status,
+    message: err.message || "Internal Server Error",
+  };
+  res.status(status).send(error);
+});
+
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}/`);
 });

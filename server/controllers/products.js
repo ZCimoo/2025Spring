@@ -11,7 +11,7 @@ router
       })
       .catch(next);
   })
-  .get("/:id", (req, res, next) => {
+  .get("/:id", async (req, res, next) => {
     const { id } = req.params;
 
     model
