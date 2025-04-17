@@ -51,6 +51,24 @@ router
         res.send(data);
       })
       .catch(next);
+  })
+  .get("/search/:query", (req, res, next) => {
+    const { query } = req.params;
+
+    model
+      .search(query)
+      .then((data) => {
+        res.send(data);
+      })
+      .catch(next);
+  })
+  .post("/seed", (req, res, next) => {
+    model
+      .seed()
+      .then((data) => {
+        res.status(201).send(data);
+      })
+      .catch(next);
   });
 
 module.exports = router;

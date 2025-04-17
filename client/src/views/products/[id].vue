@@ -3,7 +3,7 @@ import { getOne } from '@/models/products'
 import { useRoute } from 'vue-router'
 
 const route = useRoute('/products/[id]')
-const product = getOne(route.params.id)
+const product = getOne(Array.isArray(route.params.id) ? route.params.id[0] : route.params.id)
 </script>
 
 <template>

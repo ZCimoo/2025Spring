@@ -2,7 +2,7 @@
 import { refNotifications, removeNotification } from '@/models/notifications'
 import { ref } from 'vue'
 
-const notifications = refNotifications
+const notifications = refNotifications()
 </script>
 
 <template>
