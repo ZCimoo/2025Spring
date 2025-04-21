@@ -41,6 +41,8 @@ http://localhost:8000/api/v1/users
 
 ###
 GET http://localhost:8000/api/v1/users/1
+###
+GET http://localhost:8000/api/v1/users/search/Gonzalez?limit=10&sort=firstName&order=asc
 
 ###
 POST http://localhost:8000/api/v1/users
@@ -61,4 +63,6 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:8000/api/v1/users/1
+###
 
+POST http://localhost:8000/api/v1/users/seed
