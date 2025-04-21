@@ -1,14 +1,19 @@
 <script setup lang="ts">
-import { getOne } from '@/models/products'
+import {getOne, type Product} from '@/models/products'
+import {ref} from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute('/products/[id]')
-const product = getOne(Array.isArray(route.params.id) ? route.params.id[0] : route.params.id)
+const product = ref<Product>();
+getOne(route.params.id)
+.then ((response) => {
+  product.value = response
+})
 </script>
 
 <template>
   <div>
-    <div class="product section">
+    <div class="product section" v-if="product">
       <div class="product-images">
         <img v-for="i in product.images" :src="i" alt="product image" />
       </div>
@@ -21,6 +26,8 @@ const product = getOne(Array.isArray(route.params.id) ? route.params.id[0] : rou
         <button class="button is-success">Add to cart</button>
       </div>
     </div>
+    <div v-else class="section">
+      <h1 class="title">Loading...</h1>
   </div>
 </template>
 

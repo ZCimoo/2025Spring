@@ -1,8 +1,13 @@
 <script setup lang="ts">
 import { addToCart } from '@/models/cart'
 import { getAll, type Product } from '@/models/products'
+import { type DataListEnvelope } from '@/models/dataEnvelopes'
+import { ref } from 'vue'
+const products = ref({} as DataListEnvelope<Product>)
 
-const products = getAll()
+getAll().then((response) => {
+  products.value = response
+})
 
 function doAddToCart(product: Product) {
   addToCart(product)
