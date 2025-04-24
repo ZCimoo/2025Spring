@@ -38,7 +38,7 @@ async function get(id) {
   if (error) {
     throw error;
   }
-  return item;
+  return item[0];
 }
 
 async function search(

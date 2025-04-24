@@ -1,5 +1,3 @@
-/* B"H
- */
 import { ref } from 'vue'
 import { addNotification } from './notifications'
 import type { Product } from './products'
