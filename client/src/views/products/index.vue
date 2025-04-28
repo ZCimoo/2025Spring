@@ -12,6 +12,12 @@ getAll().then((response) => {
 function doAddToCart(product: Product) {
   addToCart(product)
 }
+
+interface Ratable {
+  product_reviews: {
+    average_rating: number
+  }
+}
 </script>
 
 <template>
@@ -25,6 +31,11 @@ function doAddToCart(product: Product) {
           </RouterLink>
         </div>
         <div class="product-info">
+          <b-rate
+            :model-value="(p as any)?.product_reviews[0]?.average_rating"
+            disabled
+            show-score
+          ></b-rate>
           <h2>{{ p.title }}</h2>
           <p>{{ p.description }}</p>
           <span class="price">${{ p.price }}</span>
@@ -57,6 +68,10 @@ function doAddToCart(product: Product) {
 }
 
 .button.is-success {
+  float: right;
+}
+
+.rate {
   float: right;
 }
 </style>
