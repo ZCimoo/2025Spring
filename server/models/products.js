@@ -30,7 +30,7 @@ async function getAll(limit = 30, offset = 0, sort = "id", order = "desc") {
 async function get(id) {
   const { data: item, error } = await connect()
     .from(TABLE_NAME)
-    .select("*, product_reviews(*)")
+    .select("*, reviews:product_reviews(*, reviewer:users(*))")
     .eq("id", id);
   if (!item.length) {
     throw new CustomError("Item not found", statusCodes.NOT_FOUND);
@@ -118,6 +118,8 @@ async function remove(id) {
 }
 
 async function seed() {
+  const { data: user } = await connect().from("users").select("*");
+
   for (const item of data.items) {
     const insert = mapToDB(item);
     const { data: newItem, error } = await connect()
@@ -129,7 +131,9 @@ async function seed() {
     }
 
     for (const review of item.reviews) {
-      const reviewInsert = mapReviewToDB(review, newItem[0].id);
+      const randomIndex = Math.floor(Math.random() * user.length);
+      const randomUser = user[randomIndex];
+      const reviewInsert = mapReviewToDB(review, newItem[0].id, randomUser);
 
       const { data: newReview, error } = await connect()
         .from("product_reviews")
@@ -167,14 +171,14 @@ function mapToDB(item) {
   };
 }
 
-function mapReviewToDB(review, product_id) {
+function mapReviewToDB(review, product_id, user) {
   return {
+    //id: review.id,
     product_id: product_id,
+    reviewer_id: user.id,
     rating: review.rating,
-    comment: review.comment,
-    reviewer_email: review.reviewerEmail,
-    reviewer_name: review.reviewerName,
-    date: review.date,
+    title: review.title,
+    date,
   };
 }
 

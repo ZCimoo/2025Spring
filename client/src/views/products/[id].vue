@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { getOne, type Product } from '@/models/products'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
+
+dayjs.extend(relativeTime)
 
 const route = useRoute('/products/[id]')
 const product = ref<Product>()
@@ -20,9 +24,27 @@ getOne(Array.isArray(route.params.id) ? route.params.id[0] : route.params.id).th
         <h1 class="title">
           {{ product.title }}
         </h1>
+        <h2 class="subtitle">
+          {{ product.category }} - {{ product.brand }} - {{ product.tags?.join(' / ') }}
+        </h2>
         <p>{{ product.description }}</p>
         <span class="price">${{ product.price }}</span>
         <button class="button is-success">Add to cart</button>
+
+        <div>
+          Reviews:
+          <ul>
+            <li class="card" v-for="review in product.reviews" :key="review.id">
+              <div class="card-text">
+                <img :src="review.reviewer?.image" alt="reviewer avatar" />
+                <strong>{{ review.reviewer?.firstName }}{{ review.reviewer?.lastName }}</strong> -
+                {{ review.rating }} stars
+                <p>{{ review.comment }}</p>
+                <i>{{ dayjs(review.date).fromNow() }}</i>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <div v-else class="section">
@@ -32,6 +54,21 @@ getOne(Array.isArray(route.params.id) ? route.params.id[0] : route.params.id).th
 </template>
 
 <style scoped>
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.card {
+  display: flex;
+  align-items: center;
+  margin: 1em;
+}
+.card-text {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1em;
+}
 .product {
   display: flex;
 }
