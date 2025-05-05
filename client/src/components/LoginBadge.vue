@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { isLoggedIn, login, logout, refSession } from '@/models/session'
+import { googleLogin, isLoggedIn, login, logout, refSession } from '@/models/session'
 import { get, getAll, type User } from '@/models/users'
 import { ref } from 'vue'
 const users = ref<User[]>([])
@@ -26,6 +26,14 @@ const session = refSession()
         </a>
       </div>
     </div>
+    <a class="button is-light" @click.prevent="googleLogin">
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
+        alt="google logo"
+        width="20"
+      />
+      Log in using google
+    </a>
   </div>
   <div class="profile" v-else>
     <img :src="session?.user?.image" alt="user avatar" />
